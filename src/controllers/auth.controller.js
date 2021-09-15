@@ -10,6 +10,7 @@ exports.register = async (req, res, next) => {
   try {
     const activationKey = uuidv1()
     const body = req.body
+    console.log(body)
     body.activationKey = activationKey
     const user = new User(body)
     const savedUser = await user.save()
@@ -23,7 +24,7 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const user = await User.findAndGenerateToken(req.body)
-    const payload = {sub: user.id}
+    const payload = { sub: user.id }
     const token = jwt.sign(payload, config.secret)
     return res.json({ message: 'OK', token: token })
   } catch (error) {
