@@ -45,7 +45,7 @@ const userSchema = new Schema({
   timestamps: true
 })
 
-userSchema.pre('save', async function save (next) {
+userSchema.pre('save', async function save(next) {
   try {
     if (!this.isModified('password')) {
       return next()
@@ -59,13 +59,16 @@ userSchema.pre('save', async function save (next) {
   }
 })
 
-userSchema.post('save', async function saved (doc, next) {
+userSchema.post('save', async function saved(doc, next) {
   try {
     const mailOptions = {
-      from: 'noreply',
+      from: 'rob4path@gmail.com',
       to: this.email,
       subject: 'Confirm creating account',
-      html: `<div><h1>Hello new user!</h1><p>Click <a href="${config.hostname}/api/auth/confirm?key=${this.activationKey}">link</a> to activate your new account.</p></div><div><h1>Hello developer!</h1><p>Feel free to change this template ;).</p></div>`
+      html: `<div><h1>Hello new user!</h1>
+      <p>Click <a href="${config.hostname}/api/auth/confirm?key=${this.activationKey}">link</a> 
+      to activate your new account.</p></div><div><h1>Hello developer!</h1>
+      <p>Feel free to change this template ;).</p></div>`
     }
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -83,7 +86,7 @@ userSchema.post('save', async function saved (doc, next) {
 })
 
 userSchema.method({
-  transform () {
+  transform() {
     const transformed = {}
     const fields = ['id', 'name', 'email', 'createdAt', 'role']
 
@@ -94,7 +97,7 @@ userSchema.method({
     return transformed
   },
 
-  passwordMatches (password) {
+  passwordMatches(password) {
     return bcrypt.compareSync(password, this.password)
   }
 })
@@ -102,7 +105,7 @@ userSchema.method({
 userSchema.statics = {
   roles,
 
-  checkDuplicateEmailError (err) {
+  checkDuplicateEmailError(err) {
     if (err.code === 11000) {
       var error = new Error('Email already taken')
       error.errors = [{
@@ -117,7 +120,7 @@ userSchema.statics = {
     return err
   },
 
-  async findAndGenerateToken (payload) {
+  async findAndGenerateToken(payload) {
     const { email, password } = payload
     if (!email) throw new APIError('Email must be provided for login')
 

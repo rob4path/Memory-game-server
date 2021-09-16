@@ -17,6 +17,7 @@ exports.register = async (req, res, next) => {
     res.status(httpStatus.CREATED)
     res.send(savedUser.transform())
   } catch (error) {
+    console.log(error)
     return next(User.checkDuplicateEmailError(error))
   }
 }
@@ -38,7 +39,7 @@ exports.confirm = async (req, res, next) => {
       { 'activationKey': req.query.key },
       { 'active': true }
     )
-    return res.json({ message: 'OK' })
+    return res.send("Congrats! You have activated your account! Go to the main page!")
   } catch (error) {
     next(error)
   }

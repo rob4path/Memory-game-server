@@ -12,7 +12,7 @@ const passport = require('passport')
 const passportJwt = require('../services/passport')
 
 const app = express()
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
 app.use(cors())
 app.use(helmet())
 
