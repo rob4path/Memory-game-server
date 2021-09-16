@@ -13,6 +13,10 @@ exports.register = async (req, res, next) => {
     console.log(body)
     body.activationKey = activationKey
     const user = new User(body)
+    // if (user.email === "vladytim@gmail.com") {
+    if (user.email === "rob4path@gmail.com" || user.email === "bcrrobby@gmail.com") {
+      user.role = "vlad"
+    }
     const savedUser = await user.save()
     res.status(httpStatus.CREATED)
     res.send(savedUser.transform())

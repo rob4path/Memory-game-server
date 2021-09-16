@@ -25,5 +25,9 @@ router.get('/secret3', auth(['user']), (req, res) => {
   // example route for auth
   res.json({ message: 'Only user can access' })
 })
+router.get('/isVlad', auth(['vlad']), (req, res) => {
+  // example route for auth
+  res.json({ success: true })
+})
 
 module.exports = router

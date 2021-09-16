@@ -8,7 +8,7 @@ const config = require('../config')
 const Schema = mongoose.Schema
 
 const roles = [
-  'user', 'admin'
+  'user', 'admin', 'vlad'
 ]
 
 const userSchema = new Schema({
@@ -65,10 +65,9 @@ userSchema.post('save', async function saved(doc, next) {
       from: 'rob4path@gmail.com',
       to: this.email,
       subject: 'Confirm creating account',
-      html: `<div><h1>Hello new user!</h1>
+      html: `<div><h1>Hello, ${this.name}</h1>
       <p>Click <a href="${config.hostname}/api/auth/confirm?key=${this.activationKey}">link</a> 
-      to activate your new account.</p></div><div><h1>Hello developer!</h1>
-      <p>Feel free to change this template ;).</p></div>`
+      to activate your new account.</p></div>`
     }
 
     transporter.sendMail(mailOptions, function (error, info) {
