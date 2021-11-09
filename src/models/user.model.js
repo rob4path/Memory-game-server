@@ -42,7 +42,7 @@ const userSchema = new Schema({
     enum: roles
   }
 }, {
-  timestamps: true
+  timestamps: true // createdAt: updatedAt:
 })
 
 userSchema.pre('save', async function save(next) {
