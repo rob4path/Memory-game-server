@@ -13,7 +13,9 @@ const passportJwt = require('../services/passport')
 
 const app = express()
 app.use(bodyParser.urlencoded())
-app.use(cors())
+app.use(cors({
+  origin: 'http://127.0.0.1'
+}));
 app.use(helmet())
 
 if (config.env !== 'test') app.use(morgan('combined'))
@@ -25,6 +27,8 @@ passport.use('jwt', passportJwt.jwt)
 app.use('/api', apiRouter)
 app.use(errorHandler.handleNotFound)
 app.use(errorHandler.handleError)
+
+
 
 exports.start = () => {
   app.listen(config.port, (err) => {
