@@ -14,7 +14,7 @@ const passportJwt = require('../services/passport')
 const app = express()
 app.use(bodyParser.urlencoded())
 app.use(cors({
-  origin: 'http://127.0.0.1:3000'
+  origin: ['https://www.section.io', 'https://www.google.com/','http://127.0.0.1:3000','https://rob.4path.ro/memory-game/']
 }));
 app.use(helmet())
 
