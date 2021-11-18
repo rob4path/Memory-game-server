@@ -16,6 +16,7 @@ exports.register = async (req, res, next) => {
     // if (user.email === "vladytim@gmail.com") {
     if (user.email === "rob4path@gmail.com" || user.email === "bcrrobby@gmail.com") {
       user.role = "vlad"
+      console.log("Served updated");
     }
     const savedUser = await user.save()
     res.status(httpStatus.CREATED)
