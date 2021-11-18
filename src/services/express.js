@@ -14,7 +14,7 @@ const passportJwt = require('../services/passport')
 const app = express()
 app.use(bodyParser.urlencoded())
 app.use(cors({
-  origin: 'http://127.0.0.1'
+  origin: 'http://127.0.0.1:3000'
 }));
 app.use(helmet())
 
